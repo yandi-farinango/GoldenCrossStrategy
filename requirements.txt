@@ -1,5 +1,6 @@
 pandas 
 backtrader 
-matplotlib
+matplotlib==3.2.2
 pandas 
 yfinance 
+pandas_datareader

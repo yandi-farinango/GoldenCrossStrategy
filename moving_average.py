@@ -1,4 +1,4 @@
-# Calculating moving averages 
+# Calculating Moving Average 
 
 closing_price_sum = 0 
 

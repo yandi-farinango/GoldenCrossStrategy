@@ -15,3 +15,7 @@ A golden cross is a chart pattern in which a relatively short-term moving averag
 - The golden cross appears on a chart when a stock’s short-term moving average crosses above its long-term moving average.
 
 - The golden cross can be contrasted with a death cross indicating a bearish price movement.
+<br>
+<br>
+# Backtrader 
+[Cross Over](https://www.backtrader.com/docu/indautoref/#crossover)
