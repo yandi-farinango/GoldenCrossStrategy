@@ -14,16 +14,36 @@ class GoldenCross(bt.Strategy):
     def __init__(self):
         # initialize indicators 
         self.fast_moving_average = bt.indicators.SMA(
-            self.data.close, self.params.fast, plotname='50 Day Moving Average '
+            self.data.close, period=self.params.fast, plotname='50 Day Moving Average '
         )
 
         self.slow_moving_average = bt.indicators.SMA(
-            self.data.close, self.params.slow, plotname='200 Day Moving Average '
+            self.data.close, period=self.params.slow, plotname='200 Day Moving Average '
         )
 
         # Cross over indicator takes in fast_moving_average, slow_moving_average 
         self.crossover = bt.indicators.CrossOver(self.fast_moving_average, self.slow_moving_average)
     
+    # issue buy/sell orders 
     def next(self):
-        pass
+        if self.position.size == 0:
+            # GoldenCross
+            if self.crossover > 0:
+                ammount_to_invest = (self.params.order_percentage * self.broker.cash)   # execute buy with 95% available funds 
+                self.size = math.floor(ammount_to_invest / self.data.close)
+
+                print('Buy {} shares of {} at {}'.format(self.size, self.params.ticker, self.data.close[0]))
+
+                self.buy(size=self.size)
+        
+        if self.position.size > 0:
+            # DeathCross
+            if self.crossover < 0:
+                print('Sell {} shares of {} at {}'.format(self.size, self.params.ticker, self.data.close[0]))
+                self.close()
+
+
+
+
+
 
